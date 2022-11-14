@@ -9,7 +9,7 @@ COPY ["FreelanceDJ-UserService/FreelanceDJ-UserService.csproj", "FreelanceDJ-Use
 RUN dotnet restore "FreelanceDJ-UserService/FreelanceDJ-UserService.csproj"
 COPY . .
 WORKDIR "/src/FreelanceDJ-UserService"
-RUN dotnet build "FreelanceDJ_UserService.csproj" -c Release -o /app/build
+RUN dotnet build "FreelanceDJ-UserService.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish "FreelanceDJ-UserService.csproj" -c Release -o /app/publish
