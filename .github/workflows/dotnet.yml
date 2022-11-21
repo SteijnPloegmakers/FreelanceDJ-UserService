@@ -1,4 +1,4 @@
-name: Test and Build to Dockerhub
+name: Test, Build and Push to Dockerhub
 
 on:
   push:
