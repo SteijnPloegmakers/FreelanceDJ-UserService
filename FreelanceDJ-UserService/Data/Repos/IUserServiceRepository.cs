@@ -1,6 +1,9 @@
-﻿namespace FreelanceDJ_UserService.Data.Repos
+﻿using FreelanceDJ_UserService.Models.User;
+
+namespace FreelanceDJ_UserService.Data.Repos
 {
-    public class IUserServiceRepository
+    public interface IUserServiceRepository
     {
+        Task<List<User>> GetAllUsers();
     }
 }
