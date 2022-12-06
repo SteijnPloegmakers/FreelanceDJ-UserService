@@ -1,5 +1,7 @@
 using FreelanceDJ_UserService.Data;
 using Microsoft.EntityFrameworkCore;
+using FreelanceDJ_UserService.Service;
+using FreelanceDJ_UserService.Data.Repos;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -20,6 +22,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserServiceRepository, UserServiceRepository>();
 
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("FreelanceDjConnectionString")));
 

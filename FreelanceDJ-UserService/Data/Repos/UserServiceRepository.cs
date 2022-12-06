@@ -16,5 +16,34 @@ namespace FreelanceDJ_UserService.Data.Repos
         {
             return await _dataContext.Users.ToListAsync();
         }
+
+        public async Task<User> GetSpecificUser(Guid id)
+        {
+            return await _dataContext.Users.FirstAsync(x => x.Id == id);
+        }
+
+        public async Task<AddUser> AddNewUser(AddUser addUser)
+        {
+            var user = new User
+            {
+                Id = Guid.NewGuid(),
+                Name = addUser.Name,
+                Email = addUser.Email,
+                GoogleId = addUser.GoogleId
+            };
+
+            await _dataContext.Users.AddAsync(user);
+            await _dataContext.SaveChangesAsync();
+
+            return addUser;
+        }
+
+        public async Task<User> DeleteSpecificUser(Guid id)
+        {
+            var user = await _dataContext.Users.FirstAsync(x => x.Id == id);
+            _dataContext.Remove(user);
+            await _dataContext.SaveChangesAsync();
+            return user;
+        }
     }
 }
