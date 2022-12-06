@@ -39,7 +39,7 @@ namespace FreelanceDJ_UserService.Controllers
         public async Task<IActionResult> AddDjAccount(AddUser addUser)
         {
             var user = await _userService.AddUser(addUser);
-            return Ok();
+            return Ok(user);
         }
 
         [HttpDelete]
