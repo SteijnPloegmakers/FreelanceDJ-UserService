@@ -34,19 +34,39 @@ namespace FreelanceDJ_UserService.Test
 
 
         [Test]
-        public async Task GetAllDjs_ReturnListWithDjs()
+        public async Task GetAllUsers_ReturnListWithUsers()
         {
-            //Arrange
             var data = new Mock<IUserServiceRepository>();
             data.Setup(m => m.GetAllUsers()).ReturnsAsync(_users);
-
             var userService = new Service.UserService(data.Object);
 
-            //Act
             var users = await userService.GetAllUserAccounts();
 
-            //Arrange
             Assert.AreEqual(users.Count, _users.Count);
+        }
+
+        [Test]
+        public async Task GetOneSpecificUser_ReturnThisUser()
+        {
+            var data = new Mock<IUserServiceRepository>();
+            data.Setup(m => m.GetSpecificUser(It.IsAny<Guid>())).ReturnsAsync(_users[0]);
+            var userService = new Service.UserService(data.Object);
+
+            var user = await userService.GetUserById(It.IsAny<Guid>());
+
+            Assert.AreEqual(user, _users[0]);
+        }
+
+        [Test]
+        public async Task DeleteOneSpecificUser_ReturnThisUser()
+        {
+            var data = new Mock<IUserServiceRepository>();
+            data.Setup(m => m.DeleteSpecificUser(It.IsAny<Guid>())).ReturnsAsync(_users[0]);
+            var userService = new Service.UserService(data.Object);
+
+            var user = await userService.DeleteUserById(It.IsAny<Guid>());
+
+            Assert.AreEqual(user, _users[0]);
         }
     }
 }

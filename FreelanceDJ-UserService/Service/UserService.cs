@@ -16,5 +16,20 @@ namespace FreelanceDJ_UserService.Service
         {
             return await _userServiceRepository.GetAllUsers();
         }
+
+        public async Task<User> GetUserById(Guid id)
+        {
+            return await _userServiceRepository.GetSpecificUser(id);
+        }
+
+        public async Task<AddUser> AddUser(AddUser addUser)
+        {
+            return await _userServiceRepository.AddNewUser(addUser);
+        }
+
+        public async Task<User> DeleteUserById(Guid id)
+        {
+            return await _userServiceRepository.DeleteSpecificUser(id);
+        }
     }
 }

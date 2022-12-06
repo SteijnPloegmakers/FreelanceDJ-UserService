@@ -2,6 +2,7 @@
 using FreelanceDJ_UserService.Models.User;
 using FreelanceDJ_UserService.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FreelanceDJ_UserService.Controllers
 {
@@ -10,12 +11,10 @@ namespace FreelanceDJ_UserService.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
-        private readonly DataContext _dataContext;
 
-        public UserController(IUserService userService, DataContext dataContext)
+        public UserController(IUserService userService)
         {
             _userService = userService;
-            _dataContext = dataContext;
         }
 
         [HttpGet]
@@ -28,31 +27,35 @@ namespace FreelanceDJ_UserService.Controllers
         [Route("{id:guid}")]
         public async Task<IActionResult> GetUser([FromRoute] Guid id)
         {
-            var users = await _dataContext.Users.FindAsync(id);
+            var user = await _userService.GetUserById(id);
 
-            if (users == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return Ok(users);
+            return Ok(user);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddDjAccount(AddUser addUser)
         {
-            var user = new User
+            var user = await _userService.AddUser(addUser);
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> DeleteUserAccount([FromRoute] Guid id)
+        {
+            var user = await _userService.DeleteUserById(id);
+
+            if (user != null)
             {
-                Id = Guid.NewGuid(),
-                Name = addUser.Name,
-                Email = addUser.Email,
-                GoogleId = addUser.GoogleId
-            };
+                return Ok(user);
+            }
 
-            await _dataContext.Users.AddAsync(user);
-            await _dataContext.SaveChangesAsync();
-
-            return Ok(user);
+            return NotFound();
         }
     }
 }
