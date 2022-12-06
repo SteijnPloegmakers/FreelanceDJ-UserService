@@ -1,8 +1,6 @@
-﻿using FreelanceDJ_UserService.Data;
-using FreelanceDJ_UserService.Models.User;
+﻿using FreelanceDJ_UserService.Models.User;
 using FreelanceDJ_UserService.Service;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace FreelanceDJ_UserService.Controllers
 {
