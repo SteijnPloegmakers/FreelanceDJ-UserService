@@ -2,7 +2,6 @@
 using FreelanceDJ_UserService.Models.User;
 using Moq;
 using NUnit.Framework;
-using System.Security.Principal;
 
 namespace FreelanceDJ_UserService.Test
 {
@@ -18,16 +17,14 @@ namespace FreelanceDJ_UserService.Test
                 {
                     Id = new Guid(),
                     Name = "Karen Janssen",
-                    Email = "Karenjanssen@gmail.com",
-                    GoogleId = "teewt43343trdfger2223"
+                    Email = "Karenjanssen@gmail.com"
                 },
 
                 new()
                  {
                     Id = new Guid(),
                     Name = "Richard van Zandvoort",
-                    Email = "Richardvzandvoort@gmail.com",
-                    GoogleId = "qrgj93u383r48sfdsh4"
+                    Email = "Richardvzandvoort@gmail.com"
                 }
             };
         }

@@ -24,12 +24,18 @@ namespace FreelanceDJ_UserService.Data.Repos
 
         public async Task<AddUser> AddNewUser(AddUser addUser)
         {
+            var ifEmailAlreadyExists = _dataContext.Users.Any(x => x.Email == addUser.Email);
+
+            if (ifEmailAlreadyExists)
+            {
+                return addUser;
+            }
+
             var user = new User
             {
                 Id = Guid.NewGuid(),
                 Name = addUser.Name,
-                Email = addUser.Email,
-                GoogleId = addUser.GoogleId
+                Email = addUser.Email
             };
 
             await _dataContext.Users.AddAsync(user);

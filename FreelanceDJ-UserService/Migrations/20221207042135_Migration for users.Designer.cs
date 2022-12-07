@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreelanceDJUserService.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221205101457_Users Migration")]
-    partial class UsersMigration
+    [Migration("20221207042135_Migration for users")]
+    partial class Migrationforusers
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,10 +32,6 @@ namespace FreelanceDJUserService.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("GoogleId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
